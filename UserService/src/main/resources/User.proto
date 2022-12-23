@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+option java_package = "com.stackroute.CapstoneUser";
+
+service userService{
+  rpc userUpdation(userDetails) returns (APIResponse);
+  rpc userDetailView(APIInput) returns (userDetailsView);
+  rpc userDetailDelete(APIInput) returns (APIResponse);
+  
+  rpc bookingChannel(bookingInput) returns (APIResponse);
+  rpc cancelBookingChannel(cancelInput) returns(APIResponse);
+  rpc rescheduleBookingChannel(rescheduleInput) returns(APIResponse);
+  rpc getPatientAppointmentsChannel(patientRequest) returns(APIResponse2);
+  
+  rpc searchAllChannel(APIInput) returns (searchResponse);
+  rpc searchBySpecificationChannel(searchRequest) returns(searchResponse);
+
+  rpc reviewOnlyChannel(review) returns (APIResponse);
+  rpc reviewAndRateChannel (reviewandrate) returns(APIResponse);
+  rpc deleteReviewChannel(deletereview) returns(APIResponse);
+  rpc updateReviewChannel(updatereview) returns(APIResponse);
+  rpc getAllFeedbackByIdChannel(getfeedbackbyid) returns (listresponse);
+}
+
+message userDetails{
+  string username = 1;
+  string email = 2;
+  string contactNumber = 3;
+  string password = 4;
+  string address = 5;
+  string occupation = 6;
+  string dateofBirth = 7;
+  string gender = 8;
+}
+
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message APIInput{
+  
+}
+
+message userDetailsView{
+  string username = 1;
+  string email = 2;
+  string contactNumber = 3;
+  string password = 4;
+  string address = 5;
+  string occupation = 6;
+  string dateofBirth = 7;
+  string gender = 8;
+  string responseMessage = 9;
+  int32 responseCode = 10;
+}
+
+
+message bookingInput{
+  int32 slotId = 1;
+  int32 counsellorId = 2;
+  string date = 3;
+  string fromTime = 4;
+  string toTime = 5;
+}
+
+message  cancelInput{
+  string date = 1;
+  string fromTime = 2;
+}
+
+message rescheduleInput{
+  string date = 1;
+  string fromTime = 2;
+  string toTime = 3;
+}
+
+message patientRequest{
+}
+message APIResponse2{
+  repeated data1 response=1;
+  string messagecode=2;
+  string messageresponse=3;
+}
+message data1{
+  string counselorname=1;
+  string date=2;
+  string fromTime=3;
+  string toTime=4;
+}
+
+   message searchRequest{
+      string searchBy=1 ;
+      string value=2;
+      int32 lowerLimit=3;
+      int32 upperLimit=4;
+   }
+
+
+   message searchResponse{
+      repeated Slot slotArr=1;
+    }
+
+   message Slot{
+     int32 slot_id=1;
+     string counselor_name=2;
+     string counselor_contact=3;
+     int32 fees=4;
+     string specialization=6;
+     string date=7;
+     string from_time=8;
+     string to_time=9;
+   }
+
+message updatereview{
+  int32 review_id=1;
+  string newReview=2;
+}
+message deletereview{
+  int32 review_id=1;
+}
+message review{
+  int32 counselor_id=1;
+  string review=2;
+}
+message reviewandrate{
+  int32 counselor_id=1;
+  string review=2;
+  int32 rating=3;
+}
+message getfeedbackbyid{
+}
+message listresponse{
+  repeated reviewobject reviewarray=1;
+  string successfailure=2;
+}
+message reviewobject{
+  string reviewmessage=1;
+  int32 ratinggiven=2;
+}

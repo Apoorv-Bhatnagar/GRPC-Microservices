@@ -1,0 +1,106 @@
+syntax ="proto3";
+option java_package="com.goconsult.grpc";
+
+service ProfileService{
+
+       rpc viewProfile(Empty) returns(counselor);
+       rpc updateProfile(counselor) returns(responseMessage);
+       rpc updatePassword(updatePasswordDetail) returns(responseMessage);
+      }
+
+service SlotService{
+      rpc addSlot(slot) returns (responseMessage);
+      rpc viewAllSlot(Empty) returns (viewSlotResponse);
+      rpc deleteSlot(slotIdToBeDeleted) returns (responseMessage);
+      rpc updateSlot(slotDetail) returns(responseMessage);
+   }
+
+service BookingService{
+      //from Booking Service
+      rpc viewBookedSlots(Date) returns(userSlotArr);
+    }
+service FeedbackService{
+  //from Feedback Service
+  rpc getAllFeedback(Empty) returns(feedbackResponse);
+}
+
+
+
+
+
+
+    message Empty{
+    }
+
+      message counselor{
+        string counselor_name =2;
+        string contact =3;
+        string  address =4;
+        string dob =5;
+        string gender =6 ;
+        string specialization=7;
+        int32 experience =8;
+        int32 fees =9;
+      }
+   message updatePasswordDetail{
+      string password=2;
+      string conf_password=3;
+   }
+
+   //will be used in adding only So slot_id not required and  counselor_id will be fetched from serverInterceptor
+    message slot{
+      string date=1;
+      string from_tme=2;
+      string to_time=3;
+    }
+
+    message viewSlotResponse{
+     repeated slotDetail slotArr=1;
+    }
+
+    //counselor_id will be fetched from serverInterceptor because counselor logged in can only use all the services
+    message slotDetail{
+      int32 slot_id=1;
+      string date=2;
+      string from_tme=3;
+      string to_time=4;
+    }
+
+    message slotIdToBeDeleted{
+      int32 slot_id=1;
+    }
+
+    message responseMessage{
+       string message=1;
+       int32 responseCode=2;
+    }
+
+
+message userSlotArr{
+  repeated UserSlot slotArr=1;
+  string message=2;
+}
+message UserSlot{
+  int32 booking_id=1;
+  int32 slot_id=2;
+  string user_name=3;
+  string contact=4;
+  string date=5;
+  string from_time=6;
+  string to_time=7;
+}
+
+message Date{
+  string  date=1;
+}
+message feedbackResponse{
+     repeated  Feedback feedbackArr=1;
+  string message=2;
+}
+message Feedback{
+  int32 user_id=1;
+  string user_name=2;
+  string date_time=3;
+  string review=4;
+  int32 rating=5;
+}

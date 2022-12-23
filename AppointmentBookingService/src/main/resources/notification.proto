@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_package = "com.globallogic.slotBooking";
+
+service notification {
+  rpc registerNotification(notificationMessage) returns (APIResponse);
+  rpc sendOtp(otpMessage) returns (APIResponse);
+}
+
+message notificationMessage{
+  string email = 1;
+  string name = 2;
+  string subject=3;
+  string message=4;
+}
+
+message otpMessage{
+  string email = 1;
+  string subject=2;
+
+
+}
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}

@@ -1,0 +1,34 @@
+syntax= "proto3";
+
+option java_package = "com.stackroute.grpc";
+
+service AuthService {
+  rpc login (request) returns (response) ;
+  rpc forgetPassword (forgetPasswordRequest) returns (forgetPasswordResponse) ;
+  rpc resetPassword (resetPasswordRequest) returns (resetPasswordResponse) ;
+}
+
+message request {
+  string name = 1;
+  string password=2;
+}
+
+message response {
+  string message = 1;
+  int32 responseCode=2;
+  string jwtResponse=3;
+}
+
+message forgetPasswordRequest {
+  string email = 1;
+}
+message forgetPasswordResponse{
+  string message=1;
+}
+message resetPasswordRequest {
+  int32 otp= 1;
+  string password = 2;
+}
+message resetPasswordResponse {
+  string responseMessage= 1;
+}

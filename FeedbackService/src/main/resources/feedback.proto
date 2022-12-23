@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_package = "com.stackroute.feedback";
+
+service feedback {
+  rpc reviewOnly(review) returns (APIResponse);
+  rpc reviewAndRate (reviewandrate) returns(APIResponse);
+  rpc deleteReview(deletereview) returns(APIResponse);
+  rpc updateReview(updatereview) returns(APIResponse);
+  rpc getAllFeedbackById(getfeedbackbyid) returns (listresponse);
+  rpc getAllFeedbackForCounselorById(getfeedbackbycounselorid) returns (listresponse);
+
+}
+message getfeedbackbyid{
+
+  int32 user_id=1;
+}
+message getfeedbackbycounselorid{
+int32 counselor_id=1;
+}
+message listresponse{
+  repeated reviewobject reviewarray=1;
+  string successfailure=2;
+}
+message reviewobject{
+  string reviewmessage=1;
+  int32 ratinggiven=2;
+}
+message updatereview{
+  int32 user_id=1;
+  int32 review_id=2;
+  string newReview=3;
+}
+message deletereview{
+    int32 user_id=1;
+    int32 review_id=2;
+}
+message review{
+int32 user_id = 1;
+  int32 counselor_id=2;
+  string review=3;
+}
+message reviewandrate{
+
+  int32 user_id = 1;
+  int32 counselor_id=2;
+  string review=3;
+  int32 rating=4;
+}
+
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}

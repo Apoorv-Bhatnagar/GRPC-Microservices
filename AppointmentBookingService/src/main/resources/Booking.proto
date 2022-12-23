@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option java_package = "com.globallogic.slotBooking";
+
+service booking{
+  rpc booking(bookingInput) returns (APIResponse);
+  rpc cancelBooking(cancelInput) returns(APIResponse);
+  rpc rescheduleBooking(rescheduleInput) returns(APIResponse);
+  rpc getdata(request) returns (APIResponse1);
+  rpc getPatientAppointments(patientRequest) returns(APIResponse2);
+}
+
+message bookingInput{
+  int32 slotId = 1;
+  int32 userId = 2;
+  int32 counsellorId = 3;
+  string date = 4;
+  string fromTime = 5;
+  string toTime = 6;
+}
+
+message  cancelInput{
+  string email = 1;
+  string date = 2;
+  string fromTime = 3;
+}
+
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message rescheduleInput{
+  string email = 1;
+  string date = 2;
+  string fromTime = 3;
+  string toTime = 4;
+}
+
+message request{
+  string email = 1;
+  string Date = 2;
+}
+message APIResponse1{
+  repeated data response=1;
+  string messagecode=2;
+  string messageresponse=3;
+}
+message data{
+  string username=1;
+  string date=2;
+  string fromTime=3;
+  string toTime=4;
+}
+
+message patientRequest{
+  string email = 1;
+}
+
+message APIResponse2{
+  repeated data1 response=1;
+  string messagecode=2;
+  string messageresponse=3;
+}
+
+message data1{
+  string counselorname=1;
+  string date=2;
+  string fromTime=3;
+  string toTime=4;
+}
+
+
+

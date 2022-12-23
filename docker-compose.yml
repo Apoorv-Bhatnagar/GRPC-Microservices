@@ -1,0 +1,67 @@
+version: "2"
+services:
+  userauthenticationservice:
+    build: UserAuthenticationService/
+    container_name: UserAuthenticationService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8080:8080
+
+  counselorservice:
+    build: CounselorService/
+    container_name: CounselorService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8081:8081
+
+
+
+  notificationservice:
+    build: NotificationService/
+    container_name: NotificationService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8083:8083
+
+  searchservice:
+    build: SearchService/
+    container_name: SearchService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8084:8084
+
+  appointmentbookingservice:
+    build: AppointmentBookingService/
+    container_name: AppointmentBookingService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8085:8085
+
+  feedbackservice:
+    build: FeedbackService/
+    container_name: FeedbackService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8086:8086
+
+
+  userservice:
+    build: UserService/
+    container_name: UserService_container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8082:8082

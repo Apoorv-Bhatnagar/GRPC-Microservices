@@ -1,0 +1,34 @@
+syntax ="proto3";
+option java_package="com.goconsult.grpc";
+
+service SearchAvailableSlots{
+
+      rpc searchAll(Empty) returns (searchResponse);
+      rpc searchBySpecification(searchRequest) returns(searchResponse);
+   }
+
+   message Empty{}
+
+   message searchRequest{
+      string searchBy=1 ;
+      string value=2;
+      int32 lowerLimit=3;
+      int32 upperLimit=4;
+   }
+
+
+   message searchResponse{
+      repeated Slot slotArr=1;
+    }
+
+   message Slot{
+     int32 slot_id=1;
+     string counselor_name=2;
+     string counselor_contact=3;
+     int32 fees=4;
+     string specialization=6;
+     string date=7;
+     string from_time=8;
+     string to_time=9;
+   }
+
